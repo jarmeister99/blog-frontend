@@ -1,7 +1,7 @@
 import axios from "axios";
 import { render } from 'react-dom';
 import { useState } from 'react'
-import { Button, Alert } from 'react-bootstrap'
+import { Button, Alert, Form } from 'react-bootstrap'
 import FlashMessage from 'react-flash-message'
 
 import Register from './Register'
@@ -52,10 +52,33 @@ const LoginRegister = (props) => {
                     <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-4px", display: "inline" }} onClick={toggleForm}>Register</Button>
                 </form>
             }
-            {showForm && <Register setUser={setUser} toggleForm={toggleForm}/>}
+            {showForm && <Register setUser={setUser} toggleForm={toggleForm} />}
             <div id="bad-login-alert" style={alertStyle}></div>
         </div>
     )
+
+    // return (
+    //     <Form>
+    //         <Form.Group className="mb-3" controlId="formBasicEmail">
+    //             <Form.Label>Email address</Form.Label>
+    //             <Form.Control type="email" placeholder="Enter email" />
+    //             <Form.Text className="text-muted">
+    //                 We'll never share your email with anyone else.
+    //             </Form.Text>
+    //         </Form.Group>
+
+    //         <Form.Group className="mb-3" controlId="formBasicPassword">
+    //             <Form.Label>Password</Form.Label>
+    //             <Form.Control type="password" placeholder="Password" />
+    //         </Form.Group>
+    //         <Form.Group className="mb-3" controlId="formBasicCheckbox">
+    //             <Form.Check type="checkbox" label="Check me out" />
+    //         </Form.Group>
+    //         <Button variant="primary" type="submit">
+    //             Submit
+    //         </Button>
+    //     </Form>
+    // )
 }
 
 export default LoginRegister;
