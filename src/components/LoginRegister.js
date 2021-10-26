@@ -44,11 +44,15 @@ const LoginRegister = (props) => {
 
     return (
         <div id="login-register-container" style={{ marginTop: "10px" }}>
-            <input style={{ marginLeft: "5px" }} autoComplete="current-username" type="text" placeholder="Username" value={username} onChange={(e) => (setUsername(e.target.value))} />
-            <input style={{ marginLeft: "5px" }} autoComplete="current-password" type="password" placeholder="Password" value={password} onChange={(e) => (setPassword(e.target.value))} />
-            <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-4px", display: "inline" }} onClick={loginHandler}>Login</Button>
-            <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-4px", display: "inline" }} onClick={toggleForm}>Register</Button>
-            { showForm && <Register setUser={setUser}/> }
+            {!showForm &&
+                <form>
+                    <input style={{ marginLeft: "5px" }} autoComplete="current-username" type="text" placeholder="Username" value={username} onChange={(e) => (setUsername(e.target.value))} />
+                    <input style={{ marginLeft: "5px" }} autoComplete="current-password" type="password" placeholder="Password" value={password} onChange={(e) => (setPassword(e.target.value))} />
+                    <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-4px", display: "inline" }} onClick={loginHandler}>Login</Button>
+                    <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-4px", display: "inline" }} onClick={toggleForm}>Register</Button>
+                </form>
+            }
+            {showForm && <Register setUser={setUser} toggleForm={toggleForm}/>}
             <div id="bad-login-alert" style={alertStyle}></div>
         </div>
     )

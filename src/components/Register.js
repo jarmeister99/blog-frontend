@@ -7,6 +7,7 @@ import FlashMessage from 'react-flash-message'
 
 const Register = (props) => {
     const setUser = props.setUser;
+    const toggleForm = props.toggleForm;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -17,7 +18,7 @@ const Register = (props) => {
         const user = { username, password }
         if (password !== password2) {
             const Message = () => (
-                <FlashMessage duration={5000} persistOnHover={true}>
+                <FlashMessage duration={3000} persistOnHover={true}>
                     <Alert variant="danger">Passwords did not match</Alert>
                 </FlashMessage>
             );
@@ -34,7 +35,7 @@ const Register = (props) => {
                 }).catch(err => {
                     // TODO: provide more descriptive error messages
                     const Message = () => (
-                        <FlashMessage duration={5000} persistOnHover={true}>
+                        <FlashMessage duration={3000} persistOnHover={true}>
                             <Alert variant="danger">Username in use - try another</Alert>
                         </FlashMessage>
                     );
@@ -57,6 +58,7 @@ const Register = (props) => {
                 <input style={{ marginLeft: "5px" }} autoComplete="new-password" type="password" placeholder="Password" value={password} onChange={(e) => (setPassword(e.target.value))} />
                 <input style={{ marginLeft: "5px" }} autoComplete="new-password" type="password" placeholder="Repeat password" value={password2} onChange={(e) => (setPassword2(e.target.value))} />
                 <Button as="input" type="submit" value="Create" variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-3px" }}></Button>
+                <Button variant="secondary" size="sm" style={{ marginLeft: "5px", marginTop: "-3px", display: "inline" }} onClick={toggleForm}>Cancel</Button>
             </form>
             <div id="bad-register-alert" style={alertStyle}></div>
         </div>
