@@ -30,7 +30,7 @@ function App() {
   }, [])
   return (
     <div className="App" style={{ display: "flex" }}>
-      <div style={{ flex: "20%"}}>fooba</div>
+      <div style={{ flex: "20%"}}></div>
       <div style={{ flex: "60"}}>
         <UserPanel setUser={setUser} user={user} />
         {user && <CreatePost posts={posts} setPosts={setPosts} />}
