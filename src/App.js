@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import UserPanel from './components/UserPanel'
 import PostListing from './components/PostListing'
@@ -29,14 +30,16 @@ function App() {
     })
   }, [])
   return (
-    <div className="App" style={{ display: "flex" }}>
-      <div style={{ flex: "20%"}}></div>
-      <div style={{ flex: "60"}}>
-        <UserPanel setUser={setUser} user={user} />
-        {user && <CreatePost posts={posts} setPosts={setPosts} />}
-        <PostListing user={user} posts={posts} setPosts={setPosts} />
-      </div>
-      <div style={{ flex: "20%"}}></div>
+    <div className="App">
+      <Container>
+        <Row>
+          <Col md={{ offset: 1, span: 10 }} sm={{ span: 12 }}>
+            <UserPanel setUser={setUser} user={user} />
+            {user && <CreatePost posts={posts} setPosts={setPosts} />}
+            <PostListing user={user} posts={posts} setPosts={setPosts} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
