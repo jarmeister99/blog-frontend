@@ -1,6 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'

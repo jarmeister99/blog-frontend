@@ -4,8 +4,6 @@ import { render } from 'react-dom'
 import axios from "axios";
 import FlashMessage from 'react-flash-message'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 const LoginForm = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

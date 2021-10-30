@@ -3,7 +3,6 @@ import { useState } from 'react'
 import axios from "axios";
 import { render } from 'react-dom';
 import FlashMessage from 'react-flash-message'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const RegisterForm = (props) => {
     const [username, setUsername] = useState('');

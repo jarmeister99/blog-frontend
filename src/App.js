@@ -1,19 +1,16 @@
 import axios from 'axios'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
-import UserPanel from './components/UserPanel'
 import HomePage from './views/home_page/HomePage'
 import LoginPage from './views/login_page/LoginPage'
+import ControlBar from './views/control_bar/ControlBar'
 
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
     <div className="App">
-      <div>
-      <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      </div>
+      <ControlBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
