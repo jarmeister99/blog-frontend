@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Route, Switch, Link } from 'react-router-dom'
 
 import UserPanel from './components/UserPanel'
-import HomePage from './components/HomePage'
+import HomePage from './views/home_page/HomePage'
 import LoginPage from './views/login_page/LoginPage'
 
 axios.defaults.withCredentials = true;
