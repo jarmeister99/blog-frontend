@@ -5,18 +5,11 @@ import PostListing from './posts/PostListing'
 
 axios.defaults.withCredentials = true;
 
-function HomePage() {
-  const [user, setUser] = useState('');
-  const [posts, setPosts] = useState([]);
+function HomePage(props) {
+  const user = props.user;
+  const posts = props.posts;
+  const setPosts = props.setPosts;
 
-  // display all posts from server
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/posts`).then(response => {
-      setPosts(response.data);
-    }).catch(error => {
-      console.log(error);
-    })
-  }, [])
   return (
     <div>
       <PostListing user={user} posts={posts} setPosts={setPosts}></PostListing>

@@ -33,6 +33,7 @@ const LoginForm = (props) => {
     // TODO: Make the stay signed in checkbox work
     return (
         <div>
+            <div id="bad-login-alert" className="mb-3"></div>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>

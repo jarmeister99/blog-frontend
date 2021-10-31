@@ -1,22 +1,32 @@
 import { Nav, Navbar, Container } from 'react-bootstrap'
 import { useEffect } from 'react'
+import axios from 'axios' 
 
 const ControlBar = (props) => {
     const user = props.user;
+    const setUser = props.setUser;
+
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        axios.get(`${process.env.REACT_APP_API_URL}/users/logout`).then(response => {
+            setUser('');
+            window.location = '/';
+        }).catch(err => {
+            console.log(err);
+        })  
+    }
 
     if (user) {
         return (
             <div>
-                <div>
-                    <Navbar bg="dark" variant="dark" className="mb-3">
-                        <Container>
-                            <Nav className="">
-                                <Navbar.Brand href="/"></Navbar.Brand>
-                                <Nav.Link href="/">Homepage</Nav.Link>
-                            </Nav>
-                        </Container>
-                    </Navbar>
-                </div>
+                <Navbar bg="secondary" variant="dark" className="mb-3">
+                    <Container>
+                        <Navbar.Brand>Hello, {user}</Navbar.Brand>
+                        <Nav className="me-auto">
+                            <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+                        </Nav>
+                    </Container>
+                </Navbar>
             </div>
         )
     }
