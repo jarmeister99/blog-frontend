@@ -15,7 +15,7 @@ const LoginPage = () => {
     return (
         <Container>
             <Row>
-                <Col md={{ offset: 3, span: 6 }}>
+                <Col md={{ offset: 3, span: 6 }} sm={{ span: 12 }}>
                     { !registrationFlag && <LoginForm toggleRegistrationFlag={toggleRegistrationFlag}/> }
                     { registrationFlag && <RegisterForm toggleRegistrationFlag={toggleRegistrationFlag}/> }
                 </Col>

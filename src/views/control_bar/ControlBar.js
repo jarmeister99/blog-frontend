@@ -23,6 +23,8 @@ const ControlBar = (props) => {
                     <Container>
                         <Navbar.Brand>Hello, {user}</Navbar.Brand>
                         <Nav className="me-auto">
+                            <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/create">Create Post</Nav.Link>
                             <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
                         </Nav>
                     </Container>

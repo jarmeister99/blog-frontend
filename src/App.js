@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import HomePage from './views/home_page/HomePage'
 import LoginPage from './views/login_page/LoginPage'
+import CreatePage from './views/create_page/CreatePage'
 import ControlBar from './views/control_bar/ControlBar'
 
 axios.defaults.withCredentials = true;
@@ -37,6 +38,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={() => <HomePage user={user} posts={posts} setPosts={setPosts}/>} />
         <Route path="/login" component={() => <LoginPage user={user} setUser={setUser}/>} />
+        <Route path="/create" component={() => <CreatePage user={user}/>} />
       </Switch>
     </div>
   );
