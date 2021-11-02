@@ -1,13 +1,21 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { useState } from 'react'
+import axios from 'axios'
 
 const CreatePage = (props) => {
-    const user = props.user;
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const createPost = () => {
-        
+    const createPost = (e) => {
+        e.preventDefault();
+        const post = {
+          title, content
+        }
+        axios.post(`${process.env.REACT_APP_API_URL}/posts`, post).then(response => {
+          window.location = '/';
+        }).catch(error => {
+          console.log(error);
+        })
     }
     return (
         <Container>
