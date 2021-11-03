@@ -33,13 +33,18 @@ function App() {
     })
   }, [])
 
+  // set document title
+  useEffect(() => {
+    document.title = "Blog"
+  }, []);
+
   return (
     <div className="App">
-      <ControlBar user={user} setUser={setUser}/>
+      <ControlBar user={user} setUser={setUser} />
       <Switch>
-        <Route exact path="/" component={() => <HomePage user={user} posts={posts} setPosts={setPosts}/>} />
-        <Route path="/login" component={() => <LoginPage user={user} setUser={setUser}/>} />
-        <Route path="/create" component={() => <CreatePage user={user}/>} />
+        <Route exact path="/" component={() => <HomePage user={user} posts={posts} setPosts={setPosts} />} />
+        <Route path="/login" component={() => <LoginPage user={user} setUser={setUser} />} />
+        <Route path="/create" component={() => <CreatePage user={user} />} />
       </Switch>
     </div>
   );
