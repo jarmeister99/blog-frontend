@@ -30,7 +30,6 @@ const Post = (props) => {
   }
   const titleInfoStyle = {
     fontSize: "12px",
-    marginRight: "10px",
     fontStyle: "italic"
   }
   const contentStyle = {

@@ -20,10 +20,10 @@ const ControlBar = (props) => {
             <div>
                 <Navbar bg="secondary" variant="dark" className="mb-3">
                     <Container>
-                        <Navbar.Brand>Hello, {user}</Navbar.Brand>
+                        <Navbar.Brand>{user}</Navbar.Brand>
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/create">Create Post</Nav.Link>
+                            <Nav.Link href="/create">Post</Nav.Link>
                             <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
                         </Nav>
                     </Container>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import PostListing from './posts/PostListing'
 
@@ -10,9 +11,13 @@ function HomePage(props) {
   const setPosts = props.setPosts;
 
   return (
-    <div>
-      <PostListing user={user} posts={posts} setPosts={setPosts}></PostListing>
-    </div>
+    <Container>
+      <Row>
+        <Col md={{ offset: 2, span: 8 }} sm={{ span: 12 }}>
+          <PostListing user={user} posts={posts} setPosts={setPosts}></PostListing>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
