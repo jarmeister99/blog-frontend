@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Container, Row, Col } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
-import UserPanel from './components/UserPanel'
-import PostListing from './components/PostListing'
-import CreatePost from './components/CreatePost'
+import HomePage from './views/home_page/HomePage'
+import LoginPage from './views/login_page/LoginPage'
+import CreatePage from './views/create_page/CreatePage'
+import ControlBar from './views/control_bar/ControlBar'
 
 axios.defaults.withCredentials = true;
 
 function App() {
   const [user, setUser] = useState('');
   const [posts, setPosts] = useState([]);
-  // check to see if we are logged in
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/users/user_data`).then(response => {
       if (response.data.username !== undefined) {
@@ -21,6 +22,7 @@ function App() {
       console.log(error);
     })
   }, [])
+
   // display all posts from server
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/posts`).then(response => {
@@ -29,17 +31,15 @@ function App() {
       console.log(error);
     })
   }, [])
+
   return (
     <div className="App">
-      <Container>
-        <Row>
-          <Col md={{ offset: 1, span: 10 }} sm={{ span: 12 }}>
-            <UserPanel setUser={setUser} user={user} />
-            {user && <CreatePost posts={posts} setPosts={setPosts} />}
-            <PostListing user={user} posts={posts} setPosts={setPosts} />
-          </Col>
-        </Row>
-      </Container>
+      <ControlBar user={user} setUser={setUser}/>
+      <Switch>
+        <Route exact path="/" component={() => <HomePage user={user} posts={posts} setPosts={setPosts}/>} />
+        <Route path="/login" component={() => <LoginPage user={user} setUser={setUser}/>} />
+        <Route path="/create" component={() => <CreatePage user={user}/>} />
+      </Switch>
     </div>
   );
 }

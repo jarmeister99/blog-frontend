@@ -2,8 +2,6 @@ import axios from "axios";
 import dateformat from 'dateformat'
 import { Button, Accordion } from 'react-bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 const Post = (props) => {
   const postData = props.post;
   const posts = props.posts;

@@ -1,8 +1,6 @@
 import axios from "axios";
 import { Button } from 'react-bootstrap'
 
-import LoginRegister from './LoginRegister'
-
 const UserPanel = (props) => {
     const setUser = props.setUser;
     const user = props.user;
@@ -25,7 +23,6 @@ const UserPanel = (props) => {
     else{
         return (
             <div>
-                <LoginRegister setUser={setUser}/>
             </div>
         )
     }
