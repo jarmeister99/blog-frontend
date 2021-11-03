@@ -1,5 +1,5 @@
 import { Nav, Navbar, Container } from 'react-bootstrap'
-import axios from 'axios' 
+import axios from 'axios'
 
 const ControlBar = (props) => {
     const user = props.user;
@@ -12,7 +12,7 @@ const ControlBar = (props) => {
             window.location = '/';
         }).catch(err => {
             console.log(err);
-        })  
+        })
     }
 
     if (user) {
@@ -24,6 +24,8 @@ const ControlBar = (props) => {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/create">Post</Nav.Link>
+                        </Nav>
+                        <Nav className="ms-auto">
                             <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
                         </Nav>
                     </Container>
