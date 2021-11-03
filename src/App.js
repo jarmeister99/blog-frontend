@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState('');
   const [posts, setPosts] = useState([]);
 
+  // get logged in user
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/users/user_data`).then(response => {
       if (response.data.username !== undefined) {

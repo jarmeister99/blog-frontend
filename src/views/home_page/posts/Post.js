@@ -30,7 +30,6 @@ const Post = (props) => {
   }
   const titleInfoStyle = {
     fontSize: "12px",
-    float: "right",
     marginRight: "10px",
     fontStyle: "italic"
   }
@@ -44,7 +43,7 @@ const Post = (props) => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <div style={{ width: "100%" }}>
-              <span style={titleStyle}>{postData.title}</span><span style={titleInfoStyle}>Created {formattedDate} by {postData.user}</span>
+              <span style={titleStyle}>{postData.title}</span><br/><span style={titleInfoStyle}>Created {formattedDate} by {postData.user}</span>
 
             </div>
           </Accordion.Header>

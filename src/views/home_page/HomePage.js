@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import PostListing from './posts/PostListing'

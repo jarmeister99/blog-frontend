@@ -1,5 +1,4 @@
 import { Nav, Navbar, Container } from 'react-bootstrap'
-import { useEffect } from 'react'
 import axios from 'axios' 
 
 const ControlBar = (props) => {
