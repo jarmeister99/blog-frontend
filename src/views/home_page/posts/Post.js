@@ -26,14 +26,16 @@ const Post = (props) => {
     paddingRight: "10px"
   }
   const titleStyle = {
-    fontSize: "16px"
+    fontSize: "16px",
+    fontWeight: "bold"
   }
   const titleInfoStyle = {
     fontSize: "12px",
     fontStyle: "italic"
   }
   const contentStyle = {
-    marginBottom: "30px"
+    marginBottom: "30px",
+    whiteSpace: "pre-line"
   }
   return (
     <div style={containerStyle}>
