@@ -35,8 +35,10 @@ const Post = (props) => {
   }
   const contentStyle = {
     marginBottom: "30px",
-    whiteSpace: "pre-line"
+    whiteSpace: "pre-line",
+    overflowWrap: "break-word"
   }
+
   return (
     <div style={containerStyle}>
 
