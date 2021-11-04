@@ -1,9 +1,7 @@
 import { Button, Accordion, Form } from 'react-bootstrap';
-import { useState } from 'react';
 import axios from 'axios';
 
 const EditPost = (props) => {
-    const containerStyle = props.containerStyle;
     const titleStyle = props.titleStyle;
     const titleInfoStyle = props.titleInfoStyle;
     const postData = props.postData;

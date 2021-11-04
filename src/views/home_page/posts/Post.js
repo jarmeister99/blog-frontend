@@ -1,6 +1,6 @@
 import axios from "axios";
 import dateformat from 'dateformat'
-import { Button, Accordion } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import { useState } from 'react';
 
 import EditPost from './EditPost'
