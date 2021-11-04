@@ -1,4 +1,6 @@
 import { Button, Accordion } from 'react-bootstrap';
+import { useState } from 'react'
+
 import CommentList from '../comments/CommentList'
 import CreateComment from '../comments/CreateComment'
 
@@ -12,6 +14,7 @@ const DisplayPost = (props) => {
     const deleteHandler = props.deleteHandler;
     const user = props.user;
 
+    const [comments, setComments] = useState([])
 
 
     return (
@@ -30,8 +33,8 @@ const DisplayPost = (props) => {
                     </span>
                 }
                 <div className="mt-3">
-                    {user && <CreateComment />}
-                    <CommentList />
+                    {user && <CreateComment postData={postData} comments={comments} setComments={setComments}/>}
+                    <CommentList comments={comments} setComments={setComments} postId={postData._id} sessionUser={user}/>
                 </div>
 
             </Accordion.Body>
