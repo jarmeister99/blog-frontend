@@ -1,7 +1,9 @@
 import axios from "axios";
 import dateformat from 'dateformat'
-import { Button, Accordion, Form } from 'react-bootstrap';
+import { Button, Accordion } from 'react-bootstrap';
 import { useState } from 'react';
+
+import EditPost from './EditPost'
 
 const Post = (props) => {
   const postData = props.post;
@@ -31,13 +33,6 @@ const Post = (props) => {
     setTitle(postData.title);
     setContent(postData.content);
     setEditFlag(!editFlag);
-  }
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const postId = postData._id;
-    axios.put(`${process.env.REACT_APP_API_URL}/posts`, { data: { _id: postId, title: title, content: content } }).then(() => window.location = '/').catch(err => {
-      console.log(err)
-    })
   }
 
   const containerStyle = {
@@ -86,35 +81,18 @@ const Post = (props) => {
   }
   else {
     return (
-      <div style={containerStyle}>
-        <Accordion>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>
-              <div style={{ width: "100%" }}>
-                <span style={titleStyle}>{postData.title}</span><br /><span style={titleInfoStyle}>Created {formattedDate} by {postData.user}</span>
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <Form>
-                <Form.Group className="mb-3">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control type="text" placeholder="Creative title" value={title} onChange={e => setTitle(e.target.value)} />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Content</Form.Label>
-                  <Form.Control as="textarea" rows={5} value={content} onChange={e => setContent(e.target.value)} />
-                </Form.Group>
-                <Button className="me-3" variant="primary" type="button" onClick={submitHandler}>
-                  Submit
-                </Button>
-                <Button className="btn-sm" variant="outline-danger" type="button" onClick={editHandler}>
-                  Cancel
-                </Button>
-              </Form>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </div>
+      <EditPost 
+      containerStyle={containerStyle}
+      titleStyle={titleStyle}
+      postData={postData}
+      titleInfoStyle={titleInfoStyle}
+      formattedDate={formattedDate}
+      editHandler={editHandler}
+      title={title}
+      setTitle={setTitle}
+      content={content}
+      setContent={setContent}
+      />
     )
   }
 }
