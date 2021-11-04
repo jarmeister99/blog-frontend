@@ -4,6 +4,7 @@ import { Button, Accordion } from 'react-bootstrap';
 import { useState } from 'react';
 
 import EditPost from './EditPost'
+import DisplayPost from './DisplayPost'
 
 const Post = (props) => {
   const postData = props.post;
@@ -55,46 +56,39 @@ const Post = (props) => {
     overflowWrap: "break-word"
   }
 
-  if (!editFlag) {
-    return (
-      <div style={containerStyle}>
-        <Accordion>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>
-              <div style={{ width: "100%" }}>
-                <span style={titleStyle}>{postData.title}</span><br /><span style={titleInfoStyle}>Created {formattedDate} by {postData.user}</span>
-              </div>
-            </Accordion.Header>
-            <Accordion.Body>
-              <p style={contentStyle}>{postData.content}</p>
-              {user === postData.user &&
-                <span>
-                  <Button size="sm" variant="outline-danger" style={{ marginRight: "5px", marginBottom: "5px" }} onClick={deleteHandler}>Delete</Button>
-                  <Button size="sm" variant="outline-dark" style={{ marginRight: "5px", marginBottom: "5px" }} onClick={editHandler}>Edit</Button>
-                </span>
-              }
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </div>
-    )
-  }
-  else {
-    return (
-      <EditPost 
-      containerStyle={containerStyle}
-      titleStyle={titleStyle}
-      postData={postData}
-      titleInfoStyle={titleInfoStyle}
-      formattedDate={formattedDate}
-      editHandler={editHandler}
-      title={title}
-      setTitle={setTitle}
-      content={content}
-      setContent={setContent}
-      />
-    )
-  }
+  return (
+    <div style={containerStyle}>
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          {!editFlag &&
+            <DisplayPost
+              titleStyle={titleStyle}
+              contentStyle={contentStyle}
+              titleInfoStyle={titleInfoStyle}
+              postData={postData}
+              formattedDate={formattedDate}
+              editHandler={editHandler}
+              deleteHandler={deleteHandler}
+              user={user}
+            />
+          }
+          {editFlag &&
+            <EditPost
+              titleStyle={titleStyle}
+              postData={postData}
+              titleInfoStyle={titleInfoStyle}
+              formattedDate={formattedDate}
+              editHandler={editHandler}
+              title={title}
+              setTitle={setTitle}
+              content={content}
+              setContent={setContent}
+            />
+          }
+        </Accordion.Item>
+      </Accordion>
+    </div>
+  )
 }
 
 export default Post;
