@@ -1,46 +1,36 @@
 import axios from "axios";
 import dateformat from 'dateformat'
 import { Accordion } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import EditPost from './EditPost'
 import DisplayPost from './DisplayPost'
 
 const Post = (props) => {
   const postData = props.post;
-  const posts = props.posts;
-  const setPosts = props.setPosts;
-  const user = props.user;
-
-  const [editFlag, setEditFlag] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('')
-
   const formattedDate = dateformat(postData.createdOn, "mmmm dS, yyyy")
-  const deleteHandler = (e) => {
-    e.preventDefault();
-    const postId = postData._id;
-    axios.delete(`${process.env.REACT_APP_API_URL}/posts`, { data: { _id: postId } }).then((response) => {
-      if (response.data.deletedCount > 0) {
-        const newPosts = posts.filter(post => post._id !== postId);
-        setPosts(newPosts);
+
+  const expandControl = useRef();
+
+  useEffect(() => {
+    expandControl.current.addEventListener('mousedown', function (event) {
+      if (event.detail > 1) {
+        console.log(event)
+        event.preventDefault();
       }
-    }).catch(error => {
-      console.log(error);
-    })
-  }
-  const editHandler = (e) => {
-    e.preventDefault();
-    setTitle(postData.title);
-    setContent(postData.content);
-    setEditFlag(!editFlag);
-  }
+    }, false);
+  }, [])
+
+  const [expanded, setExpanded] = useState('')
 
   const containerStyle = {
-    marginBottom: "10px",
     paddingLeft: "10px",
     paddingBottom: "5px",
     paddingRight: "10px"
+  }
+  const expandStyle = {
+    display: "flex",
+    flexDirection: "column"
   }
   const titleStyle = {
     fontSize: "16px",
@@ -56,37 +46,21 @@ const Post = (props) => {
     overflowWrap: "break-word"
   }
 
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  }
   return (
     <div style={containerStyle}>
-      <Accordion>
-        <Accordion.Item eventKey="0">
-          {!editFlag &&
-            <DisplayPost
-              titleStyle={titleStyle}
-              contentStyle={contentStyle}
-              titleInfoStyle={titleInfoStyle}
-              postData={postData}
-              formattedDate={formattedDate}
-              editHandler={editHandler}
-              deleteHandler={deleteHandler}
-              user={user}
-            />
-          }
-          {editFlag &&
-            <EditPost
-              titleStyle={titleStyle}
-              postData={postData}
-              titleInfoStyle={titleInfoStyle}
-              formattedDate={formattedDate}
-              editHandler={editHandler}
-              title={title}
-              setTitle={setTitle}
-              content={content}
-              setContent={setContent}
-            />
-          }
-        </Accordion.Item>
-      </Accordion>
+      <div style={expandStyle} onClick={toggleExpanded} ref={expandControl}>
+        <span style={titleStyle}>{postData.title}</span>
+        <span style={titleInfoStyle}>Submitted on {formattedDate} by {postData.user}</span>
+      </div>
+      {expanded &&
+        <div className="mt-3">
+          <span style={contentStyle}>{postData.content}</span>
+        </div>
+      }
+      <hr></hr>
     </div>
   )
 }
