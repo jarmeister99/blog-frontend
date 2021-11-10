@@ -4,13 +4,12 @@ import { Accordion } from 'react-bootstrap';
 import { useState, useEffect, useRef } from 'react';
 
 import EditPost from './EditPost'
-import DisplayPost from './DisplayPost'
+import PostHeader from './PostHeader'
+import PostContent from './PostContent'
 
 const Post = (props) => {
   const postData = props.post;
-  const formattedDate = dateformat(postData.createdOn, "mmmm dS, yyyy")
-
-  const expandControl = useRef();
+  const user = props.user;
 
   useEffect(() => {
     expandControl.current.addEventListener('mousedown', function (event) {
@@ -21,6 +20,7 @@ const Post = (props) => {
     }, false);
   }, [])
 
+  const expandControl = useRef();
   const [expanded, setExpanded] = useState('')
 
   const containerStyle = {
@@ -32,19 +32,7 @@ const Post = (props) => {
     display: "flex",
     flexDirection: "column"
   }
-  const titleStyle = {
-    fontSize: "16px",
-    fontWeight: "bold"
-  }
-  const titleInfoStyle = {
-    fontSize: "12px",
-    fontStyle: "italic"
-  }
-  const contentStyle = {
-    marginBottom: "30px",
-    whiteSpace: "pre-line",
-    overflowWrap: "break-word"
-  }
+
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -52,12 +40,16 @@ const Post = (props) => {
   return (
     <div style={containerStyle}>
       <div style={expandStyle} onClick={toggleExpanded} ref={expandControl}>
-        <span style={titleStyle}>{postData.title}</span>
-        <span style={titleInfoStyle}>Submitted on {formattedDate} by {postData.user}</span>
+        <PostHeader
+          postData={postData}
+        />
       </div>
       {expanded &&
         <div className="mt-3">
-          <span style={contentStyle}>{postData.content}</span>
+          <PostContent 
+            postData={postData}
+            user={user}
+          />
         </div>
       }
       <hr></hr>
