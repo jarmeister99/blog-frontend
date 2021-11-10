@@ -12,11 +12,15 @@ const PostHeader = (props) => {
         fontSize: "12px",
         fontStyle: "italic"
     }
+    const headerStyle = {
+        display: "flex",
+        flexDirection: "column"
+    }
     return (
-        <>
+        <div style={headerStyle}>
             <span style={titleStyle}>{postData.title}</span>
             <span style={titleInfoStyle}>Submitted on {formattedDate} by {postData.user}</span>
-        </>
+        </div>
     )
 }
 

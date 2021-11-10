@@ -26,26 +26,21 @@ const Post = (props) => {
   const containerStyle = {
     paddingLeft: "10px",
     paddingBottom: "5px",
-    paddingRight: "10px"
+    paddingRight: "10px",
   }
-  const expandStyle = {
-    display: "flex",
-    flexDirection: "column"
-  }
-
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
   }
   return (
-    <div style={containerStyle}>
-      <div style={expandStyle} onClick={toggleExpanded} ref={expandControl}>
+    <div style={containerStyle} onClick={toggleExpanded}>
+      <div ref={expandControl}>
         <PostHeader
           postData={postData}
         />
       </div>
       {expanded &&
-        <div className="mt-3">
+        <div className="mt-3" onClick={e => e.stopPropagation()}>
           <PostContent 
             postData={postData}
             user={user}
