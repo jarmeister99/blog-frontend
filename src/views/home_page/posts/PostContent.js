@@ -1,8 +1,4 @@
-import { Button, Accordion } from 'react-bootstrap';
-import { useState } from 'react'
-
-import CommentList from '../comments/CommentList'
-import CreateComment from '../comments/CreateComment'
+import { Button } from 'react-bootstrap';
 
 const PostContent = (props) => {
     const postData = props.postData;
@@ -10,10 +6,9 @@ const PostContent = (props) => {
     const deleteHandler = props.deleteHandler;
     const user = props.user;
 
-    const [comments, setComments] = useState([])
-
     const contentStyle = {
         marginBottom: "30px",
+        marginTop: "1%",
         whiteSpace: "pre-line",
         overflowWrap: "break-word"
       }
@@ -27,10 +22,6 @@ const PostContent = (props) => {
                     <Button size="sm" variant="outline-dark" style={{ marginRight: "5px", marginBottom: "5px" }} onClick={editHandler}>Edit</Button>
                 </span>
             }
-            <div className="mt-3">
-                {user && <CreateComment postData={postData} comments={comments} setComments={setComments} />}
-                <CommentList comments={comments} setComments={setComments} postId={postData._id} sessionUser={user} />
-            </div>
         </div>
     )
 }

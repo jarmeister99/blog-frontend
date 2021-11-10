@@ -1,26 +1,26 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import Comment from './Comment'
 
 const CommentList = (props) => {
-    const comments = props.comments;
-    const setComments = props.setComments;
     const postId = props.postId;
-    const sessionUser = props.sessionUser;
+    const user = props.user;
 
-    // display all posts from server
+    const [comments, setComments] = useState([]);
+
+    // display all comments from server
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/comments`, { params: { postId: postId } }).then(response => {
             setComments(response.data);
         }).catch(error => {
             console.log(error);
         })
-    }, [])
+    }, [postId])
 
     return (
         <div>
-            {comments.map(c => <Comment key={c._id} content={c.content} user={c.user} createdOn={c.createdOn} sessionUser={sessionUser} commentId={c._id} comments={comments} setComments={setComments} />)}
+            {comments.map(c => <Comment key={c._id} content={c.content} user={c.user} createdOn={c.createdOn} sessionUser={user} commentId={c._id} comments={comments} setComments={setComments} />)}
         </div>
     )
 }

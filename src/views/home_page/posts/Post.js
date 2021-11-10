@@ -1,36 +1,45 @@
-import axios from "axios";
-import dateformat from 'dateformat'
-import { Accordion } from 'react-bootstrap';
 import { useState, useEffect, useRef } from 'react';
 
-import EditPost from './EditPost'
 import PostHeader from './PostHeader'
 import PostContent from './PostContent'
+import CommentList from "../comments/CommentList";
+
+import './styles/PostExpand.css';
 
 const Post = (props) => {
   const postData = props.post;
   const user = props.user;
 
+  const [expanded, setExpanded] = useState(false)
+
+  const expandControl = useRef();
+  const expandBody = useRef();
+
   useEffect(() => {
     expandControl.current.addEventListener('mousedown', function (event) {
       if (event.detail > 1) {
-        console.log(event)
         event.preventDefault();
       }
     }, false);
+    expandBody.current.classList.add('closed');
   }, [])
 
-  const expandControl = useRef();
-  const [expanded, setExpanded] = useState('')
+  const toggleExpanded = () => {
+    if (expanded){
+      expandBody.current.classList.add('closed');
+      expandBody.current.classList.remove('expanded');
+    }
+    else{
+      expandBody.current.classList.add('expanded');
+      expandBody.current.classList.remove('closed');
+    }
+    setExpanded(!expanded);
+  };
 
   const containerStyle = {
     paddingLeft: "10px",
     paddingBottom: "5px",
     paddingRight: "10px",
-  }
-
-  const toggleExpanded = () => {
-    setExpanded(!expanded);
   }
   return (
     <div style={containerStyle} onClick={toggleExpanded}>
@@ -39,14 +48,16 @@ const Post = (props) => {
           postData={postData}
         />
       </div>
-      {expanded &&
-        <div className="mt-3" onClick={e => e.stopPropagation()}>
-          <PostContent 
-            postData={postData}
-            user={user}
-          />
-        </div>
-      }
+      <div ref={expandBody} onClick={e => e.stopPropagation()}>
+        <PostContent
+          postData={postData}
+          user={user}
+        />
+        <CommentList
+          postId={postData._id}
+          user={user}
+        />
+      </div>
       <hr></hr>
     </div>
   )
